@@ -1,39 +1,56 @@
 package task;
 
 public class Aperiodic {
-    private final Long id;
-    private Long arrivalTime;
-    private Long duration;
-    private Long dueDate;
+    private final int id;
+    private int arrivalTime;
+    private int duration;
+    private int dueDate;
+    private boolean isDone;
 
-    public Aperiodic(Long id, Long arrivalTime, Long duration, Long dueDate) {
+    public Aperiodic(int id, int arrivalTime, int duration, int dueDate) {
         this.id = id;
         this.arrivalTime = arrivalTime;
         this.duration = duration;
         this.dueDate = dueDate;
     }
 
-    public Long getArrivalTime() {
+    public void decrease(){
+        duration--;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Long arrivalTime) {
+    public void setArrivalTime(int arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public Long getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Long duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public Long getDueDate() {
+    public int getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Long dueDate) {
+    public void setDueDate(int dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone() {
+        isDone = true;
     }
 }
