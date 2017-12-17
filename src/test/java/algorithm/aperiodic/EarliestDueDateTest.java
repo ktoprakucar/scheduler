@@ -3,7 +3,7 @@ package algorithm.aperiodic;
 import algorithm.Algorithm;
 import org.junit.Before;
 import org.junit.Test;
-import task.Aperiodic;
+import entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ public class EarliestDueDateTest {
     @Test
     public void should_execute_schedule() {
         //given
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 20);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 19);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 18);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 17);
+        Task task1 = new Task(1, 0, 2, 20);
+        Task task2 = new Task(2, 0, 3, 19);
+        Task task3 = new Task(3, 0, 4, 18);
+        Task task4 = new Task(4, 0, 5, 17);
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
@@ -43,12 +43,12 @@ public class EarliestDueDateTest {
     @Test
     public void should_not_execute_schedule() {
         //given
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 8);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 7);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 6);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+        Task task1 = new Task(1, 0, 2, 8);
+        Task task2 = new Task(2, 0, 3, 7);
+        Task task3 = new Task(3, 0, 4, 6);
+        Task task4 = new Task(4, 0, 5, 5);
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);

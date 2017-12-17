@@ -1,13 +1,14 @@
-package task;
+package entity;
 
-public class Aperiodic {
+public class Task {
     private final int id;
     private int arrivalTime;
     private int duration;
     private int dueDate;
+    private boolean isPeriodic;
     private boolean isDone;
 
-    public Aperiodic(int id, int arrivalTime, int duration, int dueDate) {
+    public Task(int id, int arrivalTime, int duration, int dueDate) {
         this.id = id;
         this.arrivalTime = arrivalTime;
         this.duration = duration;
@@ -44,6 +45,14 @@ public class Aperiodic {
 
     public void setDueDate(int dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public boolean isPeriodic() {
+        return isPeriodic;
+    }
+
+    public void setPeriodic() {
+        isPeriodic = true;
     }
 
     public boolean isDone() {

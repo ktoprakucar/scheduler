@@ -1,7 +1,7 @@
 package algorithm.aperiodic;
 
 import algorithm.Algorithm;
-import task.Aperiodic;
+import entity.Task;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 
 public class EarliestDeadlineFirst extends Algorithm {
 
-    List<Aperiodic> uninitializedTasks = new ArrayList();
+    List<Task> uninitializedTasks = new ArrayList();
 
     @Override
-    public boolean execute(List<Aperiodic> tasks) {
+    public boolean execute(List<Task> tasks) {
         uninitializedTasks.addAll(tasks);
         int sumOfDurations = retrieveSumOfDurations(uninitializedTasks);
         for (int i = 0; i < sumOfDurations; i++) {
-            Aperiodic task = retrieveEarliestDueDate(uninitializedTasks, i);
+            Task task = retrieveEarliestDueDate(uninitializedTasks, i);
             schedule.add(task.getId());
             runTask(task);
             increaseTimeUnit();
@@ -29,18 +29,18 @@ public class EarliestDeadlineFirst extends Algorithm {
         return true;
     }
 
-    public Aperiodic retrieveEarliestDueDate(List<Aperiodic> tasks, int timeUnit) {
+    public Task retrieveEarliestDueDate(List<Task> tasks, int timeUnit) {
         Random randomGenerator = new Random();
-        Aperiodic earliestDueDateTask = tasks
+        Task earliestDueDateTask = tasks
                 .stream()
                 .filter(p-> p.getArrivalTime() <= timeUnit)
                 .filter(p -> !p.isDone())
-                .min(Comparator.comparing(Aperiodic::getDueDate))
+                .min(Comparator.comparing(Task::getDueDate))
                 .get();
 
         int earliestDueDate = earliestDueDateTask.getDueDate();
 
-        List<Aperiodic> earliestDueDateTasks = tasks
+        List<Task> earliestDueDateTasks = tasks
                 .stream()
                 .filter(p -> !p.isDone())
                 .filter(p-> p.getArrivalTime() <= timeUnit)

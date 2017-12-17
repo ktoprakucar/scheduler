@@ -3,7 +3,7 @@ package algorithm;
 import algorithm.aperiodic.EarliestDueDate;
 import org.junit.Before;
 import org.junit.Test;
-import task.Aperiodic;
+import entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +29,13 @@ public class AlgorithmTest {
         earliestDueDate.increaseTimeUnit();
         earliestDueDate.increaseTimeUnit();
 
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 6);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+        Task task1 = new Task(1, 0, 2, 10);
+        Task task2 = new Task(2, 0, 3, 9);
+        Task task3 = new Task(3, 0, 4, 6);
+        Task task4 = new Task(4, 0, 5, 5);
         task4.setDone();
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
@@ -59,14 +59,14 @@ public class AlgorithmTest {
         earliestDueDate.increaseTimeUnit();
         earliestDueDate.increaseTimeUnit();
 
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 6);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+        Task task1 = new Task(1, 0, 2, 10);
+        Task task2 = new Task(2, 0, 3, 9);
+        Task task3 = new Task(3, 0, 4, 6);
+        Task task4 = new Task(4, 0, 5, 5);
         task3.setDone();
         task4.setDone();
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
@@ -82,12 +82,12 @@ public class AlgorithmTest {
     @Test
     public void should_retrieve_latest_due_date_when_all_tasks_are_non_done(){
         //given
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 16);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+        Task task1 = new Task(1, 0, 2, 10);
+        Task task2 = new Task(2, 0, 3, 9);
+        Task task3 = new Task(3, 0, 4, 16);
+        Task task4 = new Task(4, 0, 5, 5);
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
@@ -103,15 +103,15 @@ public class AlgorithmTest {
     @Test
     public void should_retrieve_latest_due_date_when_some_tasks_are__done(){
         //given
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 16);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+        Task task1 = new Task(1, 0, 2, 10);
+        Task task2 = new Task(2, 0, 3, 9);
+        Task task3 = new Task(3, 0, 4, 16);
+        Task task4 = new Task(4, 0, 5, 5);
 
         task1.setDone();
         task3.setDone();
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
@@ -127,15 +127,15 @@ public class AlgorithmTest {
     @Test
     public void should_retrieve_sum_of_durations(){
         //given
-        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
-        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
-        Aperiodic task3 = new Aperiodic(3, 0, 4, 16);
-        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+        Task task1 = new Task(1, 0, 2, 10);
+        Task task2 = new Task(2, 0, 3, 9);
+        Task task3 = new Task(3, 0, 4, 16);
+        Task task4 = new Task(4, 0, 5, 5);
 
         task1.setDone();
         task3.setDone();
 
-        List<Aperiodic> tasks = new ArrayList();
+        List<Task> tasks = new ArrayList();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
@@ -151,7 +151,7 @@ public class AlgorithmTest {
     @Test
     public void should_decrease_duration_and_set_done(){
         //given
-        Aperiodic task = new Aperiodic(1, 0, 1, 10);
+        Task task = new Task(1, 0, 1, 10);
 
         //when
         earliestDueDate.runTask(task);
@@ -164,7 +164,7 @@ public class AlgorithmTest {
     @Test
     public void should_decrease_duration_and_not_set_done(){
         //given
-        Aperiodic task = new Aperiodic(1, 0, 4, 10);
+        Task task = new Task(1, 0, 4, 10);
 
         //when
         earliestDueDate.runTask(task);

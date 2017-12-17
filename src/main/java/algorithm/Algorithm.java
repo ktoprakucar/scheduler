@@ -1,6 +1,6 @@
 package algorithm;
 
-import task.Aperiodic;
+import entity.Task;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ public abstract class Algorithm {
     protected List<Integer> schedule = new ArrayList();
     protected int timeUnit = 0;
 
-    public abstract boolean execute(List<Aperiodic> tasks);
+    public abstract boolean execute(List<Task> tasks);
 
     public void printTasks() {
         schedule.forEach(t -> System.out.println(generateSpace(t) + t));
@@ -28,8 +28,8 @@ public abstract class Algorithm {
         return tab;
     }
 
-    public boolean isDueDateExceeded(List<Aperiodic> tasks) {
-        for (Aperiodic task : tasks) {
+    public boolean isDueDateExceeded(List<Task> tasks) {
+        for (Task task : tasks) {
             if (task.getDueDate() < timeUnit && !task.isDone()) {
                 return true;
             }
@@ -37,21 +37,21 @@ public abstract class Algorithm {
         return false;
     }
 
-    public int retrieveLatestDueDate(List<Aperiodic> tasks) {
-        Aperiodic latestDeadlineTask = tasks
+    public int retrieveLatestDueDate(List<Task> tasks) {
+        Task latestDeadlineTask = tasks
                 .stream()
                 .filter(p -> !p.isDone())
-                .max(Comparator.comparing(Aperiodic::getDueDate))
+                .max(Comparator.comparing(Task::getDueDate))
                 .get();
         return latestDeadlineTask.getDueDate();
     }
 
-    public int retrieveSumOfDurations(List<Aperiodic> tasks){
-        int sum = tasks.stream().map(Aperiodic::getDuration).mapToInt(Integer::intValue).sum();
+    public int retrieveSumOfDurations(List<Task> tasks){
+        int sum = tasks.stream().map(Task::getDuration).mapToInt(Integer::intValue).sum();
         return sum;
     }
 
-    public void runTask(Aperiodic task) {
+    public void runTask(Task task) {
         if (task.getDuration() == 1) {
             task.setDone();
         }

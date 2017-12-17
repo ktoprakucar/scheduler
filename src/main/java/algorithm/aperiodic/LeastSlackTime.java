@@ -1,7 +1,7 @@
 package algorithm.aperiodic;
 
 import algorithm.Algorithm;
-import task.Aperiodic;
+import entity.Task;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,15 +11,15 @@ import java.util.stream.Collectors;
 
 public class LeastSlackTime extends Algorithm {
 
-    List<Aperiodic> uninitializedTasks = new ArrayList();
+    List<Task> uninitializedTasks = new ArrayList();
 
     @Override
-    public boolean execute(List<Aperiodic> tasks) {
+    public boolean execute(List<Task> tasks) {
         uninitializedTasks.addAll(tasks);
         int sumOfDurations = retrieveSumOfDurations(uninitializedTasks);
 
         for (int i = 0; i < sumOfDurations; i++) {
-            Aperiodic task = retrieveLeastSlackTimeTask(uninitializedTasks, i);
+            Task task = retrieveLeastSlackTimeTask(uninitializedTasks, i);
             schedule.add(task.getId());
             runTask(task);
             increaseTimeUnit();
@@ -30,9 +30,9 @@ public class LeastSlackTime extends Algorithm {
         return true;
     }
 
-    public Aperiodic retrieveLeastSlackTimeTask(List<Aperiodic> tasks, int timeUnit) {
+    public Task retrieveLeastSlackTimeTask(List<Task> tasks, int timeUnit) {
         Random randomGenerator = new Random();
-        Aperiodic leastSlackTimeTask = tasks
+        Task leastSlackTimeTask = tasks
                 .stream()
                 .filter(p -> p.getArrivalTime() <= timeUnit)
                 .filter(p -> !p.isDone())
@@ -41,7 +41,7 @@ public class LeastSlackTime extends Algorithm {
 
         int leastSlackTime = calculateSlackTime(leastSlackTimeTask, timeUnit);
 
-        List<Aperiodic> leastSlackTimeTasks = tasks
+        List<Task> leastSlackTimeTasks = tasks
                 .stream()
                 .filter(p -> p.getArrivalTime() <= timeUnit)
                 .filter(p -> !p.isDone())
@@ -52,7 +52,7 @@ public class LeastSlackTime extends Algorithm {
         return leastSlackTimeTasks.get(index);
     }
 
-    public int calculateSlackTime(Aperiodic task, int timeUnit) {
+    public int calculateSlackTime(Task task, int timeUnit) {
         int dueDate = task.getDueDate();
         int durationLeft = task.getDuration();
         int slackTime = dueDate - timeUnit - durationLeft;
