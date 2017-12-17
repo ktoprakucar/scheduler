@@ -16,7 +16,7 @@ public abstract class Algorithm {
         schedule.forEach(t -> System.out.println(generateSpace(t) + t));
     }
 
-    public void increaseTimeUnit(){
+    public void increaseTimeUnit() {
         timeUnit++;
     }
 
@@ -37,13 +37,25 @@ public abstract class Algorithm {
         return false;
     }
 
-    public int retrieveLatestDueDate(List<Aperiodic> tasks){
+    public int retrieveLatestDueDate(List<Aperiodic> tasks) {
         Aperiodic latestDeadlineTask = tasks
                 .stream()
                 .filter(p -> !p.isDone())
                 .max(Comparator.comparing(Aperiodic::getDueDate))
                 .get();
         return latestDeadlineTask.getDueDate();
+    }
+
+    public int retrieveSumOfDurations(List<Aperiodic> tasks){
+        int sum = tasks.stream().map(Aperiodic::getDuration).mapToInt(Integer::intValue).sum();
+        return sum;
+    }
+
+    public void runTask(Aperiodic task) {
+        if (task.getDuration() == 1) {
+            task.setDone();
+        }
+        task.setDuration(task.getDuration() - 1);
     }
 
     public List<Integer> getSchedule() {
