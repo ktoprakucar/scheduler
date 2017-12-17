@@ -3,6 +3,7 @@ package algorithm;
 import task.Aperiodic;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class Algorithm {
@@ -34,6 +35,15 @@ public abstract class Algorithm {
             }
         }
         return false;
+    }
+
+    public int retrieveLatestDueDate(List<Aperiodic> tasks){
+        Aperiodic latestDeadlineTask = tasks
+                .stream()
+                .filter(p -> !p.isDone())
+                .max(Comparator.comparing(Aperiodic::getDueDate))
+                .get();
+        return latestDeadlineTask.getDueDate();
     }
 
     public List<Integer> getSchedule() {

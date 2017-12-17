@@ -78,4 +78,49 @@ public class AlgorithmTest {
         //then
         assertEquals(isExceeded, false);
     }
+
+    @Test
+    public void should_retrieve_latest_due_date_when_all_tasks_are_non_done(){
+        //given
+        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
+        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
+        Aperiodic task3 = new Aperiodic(3, 0, 4, 16);
+        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+
+        List<Aperiodic> tasks = new ArrayList();
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
+        tasks.add(task4);
+
+        //when
+        int latestDueDate = earliestDueDate.retrieveLatestDueDate(tasks);
+
+        //then
+        assertEquals(latestDueDate, 16);
+    }
+
+    @Test
+    public void should_retrieve_latest_due_date_when_some_tasks_are__done(){
+        //given
+        Aperiodic task1 = new Aperiodic(1, 0, 2, 10);
+        Aperiodic task2 = new Aperiodic(2, 0, 3, 9);
+        Aperiodic task3 = new Aperiodic(3, 0, 4, 16);
+        Aperiodic task4 = new Aperiodic(4, 0, 5, 5);
+
+        task1.setDone();
+        task3.setDone();
+
+        List<Aperiodic> tasks = new ArrayList();
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
+        tasks.add(task4);
+
+        //when
+        int latestDueDate = earliestDueDate.retrieveLatestDueDate(tasks);
+
+        //then
+        assertEquals(latestDueDate, 9);
+    }
 }
