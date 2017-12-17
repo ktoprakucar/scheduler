@@ -37,6 +37,7 @@ public class EarliestDeadlineFirst extends Algorithm {
                 .filter(p -> !p.isDone())
                 .min(Comparator.comparing(Aperiodic::getDueDate))
                 .get();
+
         int earliestDueDate = earliestDueDateTask.getDueDate();
 
         List<Aperiodic> earliestDueDateTasks = tasks

@@ -1,6 +1,6 @@
-package algorithm;
+package algorithm.aperiodic;
 
-import algorithm.aperiodic.EarliestDueDate;
+import algorithm.Algorithm;
 import org.junit.Before;
 import org.junit.Test;
 import task.Aperiodic;
@@ -11,15 +11,15 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class EarliestDueDateTest {
-    Algorithm earliestDueDate;
+    Algorithm scheduler;
 
     @Before
     public void setUp() {
-        earliestDueDate = new EarliestDueDate();
+        scheduler = new EarliestDueDate();
     }
 
     @Test
-    public void should_execute_schedule(){
+    public void should_execute_schedule() {
         //given
         Aperiodic task1 = new Aperiodic(1, 0, 2, 20);
         Aperiodic task2 = new Aperiodic(2, 0, 3, 19);
@@ -33,15 +33,15 @@ public class EarliestDueDateTest {
         tasks.add(task4);
 
         //when
-        boolean isScheduled = earliestDueDate.execute(tasks);
+        boolean isScheduled = scheduler.execute(tasks);
 
         //then
         assertEquals(isScheduled, true);
-        earliestDueDate.printTasks();
+        scheduler.printTasks();
     }
 
     @Test
-    public void should_not_execute_schedule(){
+    public void should_not_execute_schedule() {
         //given
         Aperiodic task1 = new Aperiodic(1, 0, 2, 8);
         Aperiodic task2 = new Aperiodic(2, 0, 3, 7);
@@ -55,10 +55,10 @@ public class EarliestDueDateTest {
         tasks.add(task4);
 
         //when
-        boolean isScheduled = earliestDueDate.execute(tasks);
+        boolean isScheduled = scheduler.execute(tasks);
 
         //then
         assertEquals(isScheduled, false);
-        earliestDueDate.printTasks();
+        scheduler.printTasks();
     }
 }

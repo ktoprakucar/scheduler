@@ -6,13 +6,11 @@ import task.Aperiodic;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class EarliestDeadlineFirstTest {
 
-    EarliestDeadlineFirst earliestDuedateFirst = new EarliestDeadlineFirst();
+    EarliestDeadlineFirst scheduler = new EarliestDeadlineFirst();
 
     @Test
     public void should_retrieve_earliest_due_date() {
@@ -29,7 +27,7 @@ public class EarliestDeadlineFirstTest {
         tasks.add(task4);
 
         for (int i = 0; i < 99; i++) {
-            Aperiodic earliestDuedateTask = earliestDuedateFirst.retrieveEarliestDueDate(tasks, i);
+            Aperiodic earliestDuedateTask = scheduler.retrieveEarliestDueDate(tasks, i);
             System.out.println(earliestDuedateTask.getId());
             assertEquals(earliestDuedateTask.getDueDate(), 9);
             assertNotEquals(earliestDuedateTask.getId(), 1);
@@ -38,7 +36,7 @@ public class EarliestDeadlineFirstTest {
     }
 
     @Test
-    public void should_schedule_earliest_deadline_first(){
+    public void should_schedule_earliest_deadline_first() {
         //given
         Aperiodic task1 = new Aperiodic(1, 0, 10, 33);
         Aperiodic task2 = new Aperiodic(2, 4, 3, 28);
@@ -50,10 +48,10 @@ public class EarliestDeadlineFirstTest {
         tasks.add(task3);
 
         //when
-        boolean isScheduled = earliestDuedateFirst.execute(tasks);
+        boolean isScheduled = scheduler.execute(tasks);
 
         //then
         assertTrue(isScheduled);
-        earliestDuedateFirst.printTasks();
+        scheduler.printTasks();
     }
 }
