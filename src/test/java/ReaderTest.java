@@ -21,7 +21,7 @@ public class ReaderTest {
         Task task = taskList.get(0);
 
         assertEquals(task.getId(), 1);
-        assertEquals(task.isPeriodic(), false);
+        assertEquals(task.isPeriodic(), true);
         assertEquals(task.getArrivalTime(), 1);
         assertEquals(task.getDuration(), 2);
         assertEquals(task.getDueDate(), 3);
@@ -29,7 +29,7 @@ public class ReaderTest {
         task = taskList.get(1);
 
         assertEquals(task.getId(), 2);
-        assertEquals(task.isPeriodic(), false);
+        assertEquals(task.isPeriodic(), true);
         assertEquals(task.getArrivalTime(), 1);
         assertEquals(task.getDuration(), 2);
         assertEquals(task.getDueDate(), 4);
@@ -37,7 +37,7 @@ public class ReaderTest {
         task = taskList.get(2);
 
         assertEquals(task.getId(), 3);
-        assertEquals(task.isPeriodic(), false);
+        assertEquals(task.isPeriodic(), true);
         assertEquals(task.getArrivalTime(), 0);
         assertEquals(task.getDuration(), 1);
         assertEquals(task.getDueDate(), 5);
@@ -45,7 +45,7 @@ public class ReaderTest {
         task = taskList.get(3);
 
         assertEquals(task.getId(), 4);
-        assertEquals(task.isPeriodic(), false);
+        assertEquals(task.isPeriodic(), true);
         assertEquals(task.getArrivalTime(), 2);
         assertEquals(task.getDuration(), 1);
         assertEquals(task.getDueDate(), 8);

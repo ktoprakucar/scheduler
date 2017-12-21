@@ -5,6 +5,7 @@ public class Task {
     private int arrivalTime;
     private int duration;
     private int dueDate;
+    private int period;
     private boolean isPeriodic;
     private boolean isDone;
 
@@ -13,6 +14,7 @@ public class Task {
         this.arrivalTime = arrivalTime;
         this.duration = duration;
         this.dueDate = dueDate;
+
     }
 
     public void decrease(){
@@ -47,12 +49,17 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public int getPeriod() {
+        return period;
+    }
+
     public boolean isPeriodic() {
         return isPeriodic;
     }
 
     public void setPeriodic() {
         isPeriodic = true;
+        period = dueDate;
     }
 
     public boolean isDone() {
