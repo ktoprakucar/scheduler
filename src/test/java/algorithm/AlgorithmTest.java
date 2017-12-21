@@ -1,6 +1,7 @@
 package algorithm;
 
 import algorithm.aperiodic.EarliestDueDate;
+import algorithm.periodic.EarliestDeadlineFirst;
 import org.junit.Before;
 import org.junit.Test;
 import entity.Task;
@@ -172,5 +173,41 @@ public class AlgorithmTest {
         //then
         assertEquals(task.getDuration(), 3);
         assertEquals(task.isDone(), false);
+    }
+
+    @Test
+    public void should_add_tasks_in_periodic_schedule(){
+        //given
+        Algorithm algorithm = new EarliestDeadlineFirst();
+
+        Task task1 = new Task(1, 0, 1, 2);
+        Task task2 = new Task(2, 0, 2, 6);
+        Task task3 = new Task(3, 12, 2, 6);
+        Task task4 = new Task(4, 13, 2, 2);
+
+        task1.setPeriodic();
+        task2.setPeriodic();
+        task3.setPeriodic();
+        task4.setPeriodic();
+
+        List<Task> tasks = new ArrayList();
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
+        tasks.add(task4);
+
+        //when
+        algorithm.addTasksToList(tasks, 6);
+
+        //then
+        assertEquals(tasks.size(), 6);
+
+        assertEquals(tasks.get(4).getId(),1);
+        assertEquals(tasks.get(4).getArrivalTime(),6);
+        assertEquals(tasks.get(4).getDueDate(),8);
+
+        assertEquals(tasks.get(5).getId(),2);
+        assertEquals(tasks.get(5).getArrivalTime(),6);
+        assertEquals(tasks.get(5).getDueDate(),12);
     }
 }

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class RateMonotonic extends Algorithm {
 
     private final List<Double> utilizationValueList = Arrays.asList(1.0, 0.828, 0.780, 0.757, 0.743, 0.734, 0.728, 0.724);
-    private List<Task> taskList = new ArrayList();
 
     @Override
     public boolean execute(List<Task> tasks) {
@@ -28,15 +27,7 @@ public class RateMonotonic extends Algorithm {
         return true;
     }
 
-    private void addTasksToList(List<Task> tasks, int timeUnit) {
-        List<Task> comingTasks = new ArrayList();
-        for (Task t : tasks) {
-            if (timeUnit % t.getPeriod() == 0) {
-                comingTasks.add(new Task(t.getId(), timeUnit, t.getDuration(), timeUnit + t.getPeriod()));
-            }
-        }
-        taskList.addAll(comingTasks);
-    }
+
 
     private int calculateLcm(List<Task> tasks) {
         int[] durations = tasks.stream().mapToInt(p -> p.getDueDate()).toArray();

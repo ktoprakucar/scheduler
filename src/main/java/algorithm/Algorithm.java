@@ -46,7 +46,7 @@ public abstract class Algorithm {
         return latestDeadlineTask.getDueDate();
     }
 
-    public int retrieveSumOfDurations(List<Task> tasks){
+    public int retrieveSumOfDurations(List<Task> tasks) {
         int sum = tasks.stream().map(Task::getDuration).mapToInt(Integer::intValue).sum();
         return sum;
     }
@@ -56,6 +56,16 @@ public abstract class Algorithm {
             task.setDone();
         }
         task.setDuration(task.getDuration() - 1);
+    }
+
+    public void addTasksToList(List<Task> tasks, int timeUnit) {
+        List<Task> comingTasks = new ArrayList();
+        for (Task t : tasks) {
+            if (timeUnit % t.getPeriod() == 0 && t.getArrivalTime() < timeUnit && !t.isDone()) {
+                comingTasks.add(new Task(t.getId(), timeUnit, t.getDuration(), timeUnit + t.getPeriod()));
+            }
+        }
+        tasks.addAll(comingTasks);
     }
 
     public List<Integer> getSchedule() {
