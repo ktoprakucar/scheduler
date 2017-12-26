@@ -53,9 +53,29 @@ public class Scheduler {
                 System.out.println("it cannot be scheduled by rm");
             }
         } else{
-            earliestDueDate.execute(taskList);
-            earliestDeadlineFirstAperiodic.execute(taskList);
-            leastSlackTime.execute(taskList);
+            System.out.println("-----------------EDD----------------------");
+            boolean isEddDone = earliestDueDate.execute(taskList);
+            if(isEddDone){
+                earliestDueDate.printTasks();
+            }else{
+                System.out.println("it cannot be scheduled by edd");
+            }
+            taskList = reader.read(fileName);
+            System.out.println("-----------------EDF----------------------");
+            boolean isEdfDone = earliestDeadlineFirstAperiodic.execute(taskList);
+            if(isEdfDone){
+                earliestDeadlineFirstAperiodic.printTasks();
+            }else {
+                System.out.println("it cannot be scheduled by edf");
+            }
+            taskList = reader.read(fileName);
+            System.out.println("-----------------LL-----------------------");
+            boolean isLlDone = leastSlackTime.execute(taskList);
+            if(isLlDone){
+                leastSlackTime.printTasks();
+            }else{
+                System.out.println("it cannot be scheduled by ll");
+            }
         }
     }
 
@@ -71,5 +91,12 @@ public class Scheduler {
     public void should_schedule_edf_periodic(){
         earliestDeadlineFirstPeriodic.execute(taskList);
         earliestDeadlineFirstPeriodic.printTasks();
+    }
+
+    @Ignore
+    @Test
+    public void should_schedule_ll(){
+        leastSlackTime.execute(taskList);
+        leastSlackTime.printTasks();
     }
 }
