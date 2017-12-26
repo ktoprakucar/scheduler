@@ -16,11 +16,16 @@ public class EarliestDeadlineFirst extends Algorithm {
     @Override
     public boolean execute(List<Task> tasks) {
         uninitializedTasks.addAll(tasks);
-        int sumOfDurations = retrieveSumOfDurations(uninitializedTasks);
-        for (int i = 0; i < sumOfDurations; i++) {
-            Task task = retrieveEarliestDueDate(uninitializedTasks, i);
-            schedule.add(task.getId());
-            runTask(task);
+        int latestDueDate = retrieveLatestDueDate(uninitializedTasks);
+        for (int i = 0; i < latestDueDate; i++) {
+            boolean isAnyTaskNotDone = checkAnyTaskLeft(tasks, i);
+            if (isAnyTaskNotDone) {
+                Task task = retrieveEarliestDueDate(uninitializedTasks, i);
+                schedule.add(task.getId());
+                runTask(task);
+            } else {
+                schedule.add(0);
+            }
             increaseTimeUnit();
             if (isDueDateExceeded(uninitializedTasks)) {
                 return false;
@@ -33,7 +38,7 @@ public class EarliestDeadlineFirst extends Algorithm {
         Random randomGenerator = new Random();
         Task earliestDueDateTask = tasks
                 .stream()
-                .filter(p-> p.getArrivalTime() <= timeUnit)
+                .filter(p -> p.getArrivalTime() <= timeUnit)
                 .filter(p -> !p.isDone())
                 .min(Comparator.comparing(Task::getDueDate))
                 .get();
@@ -43,7 +48,7 @@ public class EarliestDeadlineFirst extends Algorithm {
         List<Task> earliestDueDateTasks = tasks
                 .stream()
                 .filter(p -> !p.isDone())
-                .filter(p-> p.getArrivalTime() <= timeUnit)
+                .filter(p -> p.getArrivalTime() <= timeUnit)
                 .filter(p -> p.getDueDate() == earliestDueDate)
                 .collect(Collectors.toList());
 

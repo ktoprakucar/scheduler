@@ -12,7 +12,7 @@ public class EarliestDueDate extends Algorithm {
     public boolean execute(List<Task> tasks) {
         tasks.sort(Comparator.comparingInt(Task::getDueDate));
         for (Task task : tasks) {
-            for (int i = 0; i < task.getDuration();task.decrease()) {
+            for (int i = 0; i < task.getDuration(); task.decrease()) {
                 schedule.add(task.getId());
                 increaseTimeUnit();
                 if (isDueDateExceeded(tasks)) {

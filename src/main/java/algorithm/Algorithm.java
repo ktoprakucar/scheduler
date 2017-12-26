@@ -71,6 +71,11 @@ public abstract class Algorithm {
         tasks.addAll(comingTasks);
     }
 
+    public boolean checkAnyTaskLeft(List<Task> tasks, int timeUnit) {
+        boolean isAnyTaskLeft = tasks.stream().anyMatch(p -> p.getArrivalTime() < timeUnit && !p.isDone());
+        return isAnyTaskLeft;
+    }
+
     public List<Integer> getSchedule() {
         return schedule;
     }

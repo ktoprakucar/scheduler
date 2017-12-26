@@ -17,7 +17,6 @@ public class LeastSlackTime extends Algorithm {
     public boolean execute(List<Task> tasks) {
         uninitializedTasks.addAll(tasks);
         int latestDueDate = retrieveLatestDueDate(uninitializedTasks);
-
         for (int i = 0; i < latestDueDate; i++) {
             boolean isAnyTaskNotDone = checkAnyTaskLeft(tasks, i);
             if (isAnyTaskNotDone) {
@@ -33,11 +32,6 @@ public class LeastSlackTime extends Algorithm {
             }
         }
         return true;
-    }
-
-    private boolean checkAnyTaskLeft(List<Task> tasks, int timeUnit) {
-        boolean isAnyTaskLeft = tasks.stream().anyMatch(p -> p.getArrivalTime() < timeUnit && !p.isDone());
-        return isAnyTaskLeft;
     }
 
     public Task retrieveLeastSlackTimeTask(List<Task> tasks, int timeUnit) {
