@@ -13,7 +13,8 @@ public abstract class Algorithm {
     public abstract boolean execute(List<Task> tasks);
 
     public void printTasks() {
-        schedule.forEach(t -> System.out.println(generateSpace(t) + t));
+        for (int i = 0; i < schedule.size(); i++)
+            System.out.println(i + " ---> " + generateSpace(schedule.get(i)) + schedule.get(i));
     }
 
     public void increaseTimeUnit() {
@@ -61,8 +62,10 @@ public abstract class Algorithm {
     public void addTasksToList(List<Task> tasks, int timeUnit) {
         List<Task> comingTasks = new ArrayList();
         for (Task t : tasks) {
-            if (timeUnit % t.getPeriod() == 0 && t.getArrivalTime() < timeUnit && !t.isDone()) {
-                comingTasks.add(new Task(t.getId(), timeUnit, t.getDuration(), timeUnit + t.getPeriod()));
+            if (t.isOriginal() && timeUnit % t.getPeriod() == 0 && timeUnit != 0) {
+                Task comingTask = new Task(t.getId(), timeUnit, t.getStableDuration(), timeUnit + t.getPeriod());
+                comingTask.setPeriod(t.getPeriod());
+                comingTasks.add(comingTask);
             }
         }
         tasks.addAll(comingTasks);

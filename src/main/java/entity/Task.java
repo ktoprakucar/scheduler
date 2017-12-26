@@ -8,13 +8,15 @@ public class Task {
     private int period;
     private boolean isPeriodic;
     private boolean isDone;
+    private final int stableDuration;
+    private boolean isOriginal;
 
     public Task(int id, int arrivalTime, int duration, int dueDate) {
         this.id = id;
         this.arrivalTime = arrivalTime;
         this.duration = duration;
         this.dueDate = dueDate;
-
+        stableDuration = duration;
     }
 
     public void decrease(){
@@ -49,6 +51,10 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
     public int getPeriod() {
         return period;
     }
@@ -68,5 +74,17 @@ public class Task {
 
     public void setDone() {
         isDone = true;
+    }
+
+    public int getStableDuration() {
+        return stableDuration;
+    }
+
+    public boolean isOriginal() {
+        return isOriginal;
+    }
+
+    public void setOriginal(boolean original) {
+        isOriginal = original;
     }
 }

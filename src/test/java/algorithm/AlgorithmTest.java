@@ -181,7 +181,9 @@ public class AlgorithmTest {
         Algorithm algorithm = new EarliestDeadlineFirst();
 
         Task task1 = new Task(1, 0, 1, 2);
+        task1.setOriginal(true);
         Task task2 = new Task(2, 0, 2, 6);
+        task2.setOriginal(true);
         Task task3 = new Task(3, 12, 2, 6);
         Task task4 = new Task(4, 13, 2, 2);
 

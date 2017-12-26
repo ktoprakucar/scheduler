@@ -19,15 +19,18 @@ public class RateMonotonic extends Algorithm {
         int lcm = calculateLcm(tasks);
         for (int i = 0; i < lcm; i++) {
             addTasksToList(tasks, i);
-            Task task = retrieveHighestPriority(tasks, i);
-            schedule.add(task.getId());
-            runTask(task);
+            boolean isAnyTaskNotDone = tasks.stream().anyMatch(p->!p.isDone());
+            if(isAnyTaskNotDone) {
+                Task task = retrieveHighestPriority(tasks, i);
+                schedule.add(task.getId());
+                runTask(task);
+            }else{
+                schedule.add(0);
+            }
             increaseTimeUnit();
         }
         return true;
     }
-
-
 
     private int calculateLcm(List<Task> tasks) {
         int[] durations = tasks.stream().mapToInt(p -> p.getDueDate()).toArray();
@@ -44,9 +47,9 @@ public class RateMonotonic extends Algorithm {
             totalValue += (double) t.getDuration() / t.getDueDate();
         }
         if (totalValue > utilizationValueList.get(tasks.size() - 1)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private boolean isGCDGreaterThanOne(List<Task> tasks) {

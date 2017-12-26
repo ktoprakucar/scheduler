@@ -22,9 +22,14 @@ public class EarliestDeadlineFirst extends Algorithm {
         int lcm = calculateLcm(tasks);
         for (int i = 0; i < lcm; i++) {
             addTasksToList(tasks, i);
-            Task task = retrieveEarliestDueDate(tasks, i);
-            schedule.add(task.getId());
-            runTask(task);
+            boolean isAnyTaskNotDone = tasks.stream().anyMatch(p -> !p.isDone());
+            if (isAnyTaskNotDone) {
+                Task task = retrieveEarliestDueDate(tasks, i);
+                schedule.add(task.getId());
+                runTask(task);
+            } else {
+                schedule.add(0);
+            }
             increaseTimeUnit();
         }
         return true;
@@ -35,10 +40,10 @@ public class EarliestDeadlineFirst extends Algorithm {
         for (Task t : tasks) {
             totalValue += (double) t.getDuration() / t.getDueDate();
         }
-        if (totalValue >  1) {
-            return false;
+        if (totalValue > 1) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     private int calculateLcm(List<Task> tasks) {
@@ -52,17 +57,17 @@ public class EarliestDeadlineFirst extends Algorithm {
         Random randomGenerator = new Random();
         Task earliestDueDateTask = tasks
                 .stream()
-                .filter(p-> p.getArrivalTime() <= timeUnit)
                 .filter(p -> !p.isDone())
+                .filter(p -> p.getArrivalTime() <= timeUnit)
                 .min(Comparator.comparing(Task::getDueDate))
                 .get();
 
-        int earliestDueDate = earliestDueDateTask.getPeriod();
+        int earliestDueDate = earliestDueDateTask.getDueDate();
 
         List<Task> earliestDueDateTasks = tasks
                 .stream()
                 .filter(p -> !p.isDone())
-                .filter(p-> p.getArrivalTime() <= timeUnit)
+                .filter(p -> p.getArrivalTime() <= timeUnit)
                 .filter(p -> p.getDueDate() == earliestDueDate)
                 .collect(Collectors.toList());
 

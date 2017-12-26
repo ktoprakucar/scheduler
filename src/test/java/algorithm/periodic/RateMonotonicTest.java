@@ -44,10 +44,10 @@ public class RateMonotonicTest {
         tasks.add(task3);
 
         //when
-        boolean isScheduled = rateMonotonic.checkUtilisationValue(tasks);
+        boolean isNotScheduled = rateMonotonic.checkUtilisationValue(tasks);
 
         //then
-        assertFalse(isScheduled);
+        assertTrue(isNotScheduled);
     }
 
     @Test

@@ -24,7 +24,8 @@ public class Reader {
         for (int i = 0; i < numberOfTasks; i++) {
             String[] values = lines.get(i).split(" ");
             Task task = new Task(id++, Integer.valueOf(values[1]), Integer.valueOf(values[2]), Integer.valueOf(values[3]));
-            if ("1".equals(values[0])) {
+            task.setOriginal(true);
+            if ("0".equals(values[0])) {
                 task.setPeriodic();
             }
             tasks.add(task);
